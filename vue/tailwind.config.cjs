@@ -7,5 +7,10 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require(
+        '@tailwindcss/forms',
+        '@tailwindcss/aspect-ratio'
+    ),
+  ],
 }
