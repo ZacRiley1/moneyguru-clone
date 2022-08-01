@@ -1,16 +1,8 @@
 <template>
-  <!--
-    This example requires updating your template:
-
-    ```
-    <html class="h-full bg-gray-50">
-    <body class="h-full">
-    ```
-  -->
   <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
       <div>
-        <img class="mx-auto h-12 w-auto" src="../assets/moneyguru.svg" alt="Workflow" />
+        <a href="/"><img class="mx-auto h-12 w-auto" src="../assets/moneyguru.svg" alt="Workflow" /></a>
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign up for an account</h2>
         <p class="mt-2 text-center text-sm text-gray-600">
           Already have an account?
