@@ -158,8 +158,9 @@
 
         </PopoverGroup>
         <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
-          <a href="/login" class="whitespace-nowrap text-base font-medium text-sky-900 lg:text-white hover:text-sky-900"> Sign in </a>
-          <a href="/register" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-fuchsia-900 hover:bg-fuchsia-800"> Sign up </a>
+          <router-link :to="{name: 'Login'}" class="whitespace-nowrap text-base font-medium text-sky-900 lg:text-white hover:text-sky-900"> Sign in </router-link>
+          <router-link :to="{name: 'Register'}" class="ml-8 whitespace-nowrap inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-full shadow-sm text-base font-medium text-white bg-fuchsia-900 hover:bg-fuchsia-800"> Sign up </router-link>
+          <LogoutIcon @click="logout" class="w-5 h-5 ml-3 text-white cursor-pointer"></LogoutIcon>
         </div>
       </div>
     </div>
@@ -205,12 +206,13 @@
               </a>
             </div>
             <div>
-              <a href="#" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-fuchsia-900 hover:bg-fuchsia-800"> Sign up </a>
+              <router-link :to="{name: 'Register'}" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-fuchsia-900 hover:bg-fuchsia-800"> Sign up </router-link>
               <p class="mt-6 text-center text-base font-medium text-gray-500">
                 Existing customer?
                 {{ ' ' }}
-                <a href="#" class="text-fuchsia-900 hover:text-fuchsia-800"> Sign in </a>
+                <router-link :to="{name: 'Login'}" class="text-fuchsia-900 hover:text-fuchsia-800"> Sign in </router-link>
               </p>
+              <LogoutIcon @click="logout" class="w-5 h-5 text-fuchsia-900 cursor-pointer"></LogoutIcon>
             </div>
           </div>
         </div>
@@ -220,12 +222,14 @@
 </template>
 
 <script setup>
-import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from '@headlessui/vue'
+import { Popover, PopoverButton, PopoverGroup, PopoverPanel } from '@headlessui/vue';
 import {
   CurrencyPoundIcon,
   CreditCardIcon,
+  MenuIcon,
   PhoneIcon,
   ViewGridIcon,
+  XIcon,
   CashIcon,
   TrendingUpIcon,
   LockClosedIcon,
@@ -235,8 +239,26 @@ import {
   EyeIcon,
   IdentificationIcon,
   HomeIcon,
-} from '@heroicons/vue/outline'
-import { ChevronDownIcon } from '@heroicons/vue/solid'
+  LogoutIcon,
+} from '@heroicons/vue/outline';
+import { ChevronDownIcon } from '@heroicons/vue/solid';
+import { useStore } from 'vuex';
+import { useRouter } from 'vue-router';
+
+
+const store = useStore();
+const router = useRouter();
+
+const logout = () => {
+  store.dispatch("logout")
+  .then(() => {
+    router.push({
+      name: "Home",
+    });
+  });
+
+}
+
 const loans = [
   {
     name: 'Personal Loans',

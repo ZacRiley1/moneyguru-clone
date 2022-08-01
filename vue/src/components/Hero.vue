@@ -22,24 +22,13 @@
         </main>
       </div>
     </div>
-    <div class="hidden lg:block lg:absolute lg:inset-y-0 lg:right-0">
-      <img class="h-56 w-full bg-right-top object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="../assets/the_money_guru.png" alt="" />
+    <div class="absolute lg:inset-y-0 lg:right-0">
+      <img class="hidden lg:block h-56 w-full bg-right-top object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="../assets/the_money_guru.png" alt="" />
     </div>
   </div>
 </template>
 
 <script setup>
-import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue'
-import { MenuIcon, XIcon } from '@heroicons/vue/outline'
 import Header from './Header.vue';
 
-const navigation = [
-  { name: 'Loans', href: '#' },
-  { name: 'Credit Cards', href: '#' },
-  { name: 'Mortgages', href: '#' },
-  { name: 'Current Accounts', href: '#' },
-  { name: 'Savings & Investments', href: '#' },
-  { name: 'Business', href: '#' },
-  { name: 'Insights', href: '#' },
-]
 </script>

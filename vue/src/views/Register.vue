@@ -2,31 +2,32 @@
   <div class="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
       <div>
-        <a href="/"><img class="mx-auto h-12 w-auto" src="../assets/moneyguru.svg" alt="Workflow" /></a>
+        <router-link :to="{name: 'Home'}"><img class="mx-auto h-12 w-auto" src="../assets/moneyguru.svg" alt="Workflow" /></router-link>
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Sign up for an account</h2>
         <p class="mt-2 text-center text-sm text-gray-600">
           Already have an account?
           {{ ' ' }}
-          <a href="/login" class="font-medium text-fuchsia-900 hover:text-fuchsia-700"> Sign in here</a>
+          <router-link :to="{name: 'Login'}" class="font-medium text-fuchsia-900 hover:text-fuchsia-700"> Sign in here</router-link>
         </p>
       </div>
-      <form class="mt-8 space-y-6" action="#" method="POST">
+      <form class="mt-8 space-y-6" @submit="register">
         <input type="hidden" name="remember" value="true" />
         <div class="rounded-md shadow-sm -space-y-px">
           <div>
+            <label for="fullname" class="sr-only">Full Name</label>
+            <input id="fullname" name="name" type="name" autocomplete="name" required="" v-model="user.name" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-fuchsia-900 focus:border-fuchsia-700 focus:z-10 sm:text-sm" placeholder="Full Name" />
+          </div>
+          <div>
             <label for="email-address" class="sr-only">Email address</label>
-            <input id="email-address" name="email" type="email" autocomplete="email" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email address" />
+            <input id="email-address" name="email" type="email" autocomplete="email" required="" v-model="user.email" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-m-md focus:outline-none focus:ring-fuchsia-900 focus:border-fuchsia-700 focus:z-10 sm:text-sm" placeholder="Email address" />
           </div>
           <div>
             <label for="password" class="sr-only">Password</label>
-            <input id="password" name="password" type="password" autocomplete="current-password" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Password" />
+            <input id="password" name="password" type="password" autocomplete="current-password" required="" v-model="user.password" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-m-md focus:outline-none focus:ring-fuchsia-900 focus:border-fuchsia-700 focus:z-10 sm:text-sm" placeholder="Password" />
           </div>
-        </div>
-
-        <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-fuchsia-900 focus:ring-fuchsia-900 border-gray-300 rounded" />
-            <label for="remember-me" class="ml-2 block text-sm text-gray-900"> Remember me </label>
+          <div>
+            <label for="password_confirmation" class="sr-only">Confirm Password</label>
+            <input id="password_confirmation" name="password_confirmation" type="password" autocomplete="current-password-confirmation" required="" v-model="user.password_confirmation" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-fuchsia-900 focus:border-fuchsia-700 focus:z-10 sm:text-sm" placeholder="Confirm Password" />
           </div>
         </div>
 
@@ -45,4 +46,25 @@
 
 <script setup>
 import { LockClosedIcon } from '@heroicons/vue/solid'
+import store from '../store';
+import {useRouter} from "vue-router";
+
+const router = useRouter();
+
+const user = {
+    name: '',
+    email: '',
+    password: '',
+    password_confirmation: '',
+};
+function register(ev) {
+  ev.preventDefault();
+  store
+    .dispatch('register', user)
+    .then((res) => {
+      router.push({
+        name: 'Home'
+      })
+    })
+}
 </script>
